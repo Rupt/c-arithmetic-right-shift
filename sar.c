@@ -1,6 +1,3 @@
-#include <limits.h>
-#include <stdint.h>
-
 /* Portable C arithmetic right shift (sar)
  *
  * The C specification leaves the right shift m >> n 
@@ -95,7 +92,7 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
     type                                                               \
     sar##label(type m, type n)                                         \
     {                                                                  \
-        const type logical = ((type)-1 >> 1) > 0;                      \
+        const int logical = ((type)-1 >> 1) > 0;                      \
         utype fill;                                                    \
         fill = -(logical && m < 0);                                    \
         return (m >> n) | (fill << (CHAR_BIT*sizeof(m) - n));          \
