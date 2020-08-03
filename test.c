@@ -5,7 +5,7 @@
 #include "sar.c"
 
 /*
- * Use unsigned to force logical shifts, and make them arithmetic.
+ * Use unsigned to force logical shifts, then fix-up to arithmetic.
  * redefine sar.c functions prefixed with and L to test this.
  */
 #define SARLDEFINE(label, type, utype)                                 \
