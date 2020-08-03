@@ -92,18 +92,15 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
     type                                                               \
     sar##label(type m, type n)                                         \
     {                                                                  \
-        const int logical = ((type)-1 >> 1) > 0;                      \
+        const int logical = ((type)-1 >> 1) > 0;                       \
         utype fill;                                                    \
         fill = -(logical && m < 0);                                    \
         return (m >> n) | (fill << (CHAR_BIT*sizeof(m) - n));          \
     }
 
 SARDEFINE(c, signed char, unsigned char)
-
 SARDEFINE(s, short int, unsigned short int)
-
 SARDEFINE(i, int, unsigned int)
-
 SARDEFINE(l, long int, unsigned long int)
 
 #ifdef LLONG_MAX
@@ -132,20 +129,12 @@ SARDEFINE(ptr, intptr_t, uintptr_t)
 
 #ifdef INT_LEAST8_MIN
 SARDEFINE(max, intmax_t, uintmax_t)
-
 SARDEFINE(least8, int_least8_t, int_least8_t)
-
 SARDEFINE(least16, int_least16_t, int_least16_t)
-
 SARDEFINE(least32, int_least32_t, int_least32_t)
-
 SARDEFINE(least64, int_least64_t, int_least64_t)
-
 SARDEFINE(fast8, int_fast8_t, int_fast8_t)
-
 SARDEFINE(fast16, int_fast16_t, int_fast16_t)
-
 SARDEFINE(fast32, int_fast32_t, int_fast32_t)
-
 SARDEFINE(fast64, int_fast64_t, int_fast64_t)
 #endif
