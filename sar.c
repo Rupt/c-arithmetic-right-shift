@@ -12,7 +12,7 @@
  *
  * This preserves its sign, and makes
  *      m >> n  equal to  m/2**n ,
- * rounded towards -infinity.
+ * rounded towards -ININITY.
  *
  * The sar* functions below perform arithmetic right shifts, independent
  * of which shift is given by the implementation.
