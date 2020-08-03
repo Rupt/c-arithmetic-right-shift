@@ -96,7 +96,7 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
     {                                                                  \
         const int logical = ((type)-1 >> 1) > 0;                       \
         utype fill;                                                    \
-        fill = -(logical && m < 0);                                    \
+        fill = -(logical & (m < 0));                                    \
         return (m >> n) | (fill << (CHAR_BIT*sizeof(m) - n));          \
     }
 

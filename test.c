@@ -14,7 +14,7 @@
     {                                                                  \
         const type logical = ((utype)-1 >> 1) > 0;                     \
         utype fill;                                                    \
-        fill = -(logical && m < 0);                                    \
+        fill = -(logical & (m < 0));                                    \
         return ((utype)m >> n) | (fill << (CHAR_BIT*sizeof(m) - n));   \
     }
 
