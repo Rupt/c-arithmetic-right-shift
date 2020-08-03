@@ -74,7 +74,9 @@ int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
 int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
 #endif
 
-/* Macro to define these declared functions.
+
+/*
+ * Macro to define these declared functions.
  *
  * Arguments:
  *     label is the suffix to sar.

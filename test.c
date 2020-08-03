@@ -5,12 +5,12 @@
 #include "sar.c"
 
 /*
- * Use unsigned to force logical shifts; make them arithmetic.
+ * Use unsigned to force logical shifts, and make them arithmetic.
  * redefine sar.c functions prefixed with and L to test this.
  */
-#define LSARDEFINE(label, type, utype)                           \
+#define LSARDEFINE(label, type, utype)                                 \
     type                                                               \
-    Lsar##label(type m, type n)                                  \
+    Lsar##label(type m, type n)                                        \
     {                                                                  \
         const type logical = ((utype)-1 >> 1) > 0;                     \
         utype fill;                                                    \
@@ -153,20 +153,25 @@ int
 main()
 {
     signed char checks[][3] = {
-        {-5, 1, -3},
-        {-5, 2, -2},
+        /* negative */
         {-1, 1, -1},
+        {-5, 2, -2},
+        {-5, 1, -3},
         {-128, 1, -64},
-        {127, 1, 63},
-        {5, 1, 2},
-        {4, 1, 2},
+        /* positive */
         {1, 1, 0},
+        {4, 1, 2},
+        {5, 1, 2},
+        {127, 1, 63},
     };
     int nchecks = sizeof(checks)/sizeof(checks[0]);
     int i;
 
     for (i = 0; i < nchecks; ++i)
         testeq(checks[i][0], checks[i][1], checks[i][2]);
+    
+    assert(sari(-63, 3) == -8);
+    assert(sarl(-0x200000000l, 1) == -0x100000000l);
 
     return 0;
 }
