@@ -89,7 +89,6 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
  *
  * we then left shift fill (which is defined since it is unsigned) to
  * get 1s in the high bits, then logical or to set them.
- * The c standard re
  */
 #define SARDEFINE(label, type, utype)                                  \
     type                                                               \
