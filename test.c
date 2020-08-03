@@ -8,9 +8,9 @@
  * Use unsigned to force logical shifts, and make them arithmetic.
  * redefine sar.c functions prefixed with and L to test this.
  */
-#define LSARDEFINE(label, type, utype)                                 \
+#define SARLDEFINE(label, type, utype)                                 \
     type                                                               \
-    Lsar##label(type m, type n)                                        \
+    sarL##label(type m, type n)                                        \
     {                                                                  \
         const type logical = ((utype)-1 >> 1) > 0;                     \
         utype fill;                                                    \
@@ -18,45 +18,45 @@
         return ((utype)m >> n) | (fill << (CHAR_BIT*sizeof(m) - n));   \
     }
 
-LSARDEFINE(c, signed char, unsigned char)
-LSARDEFINE(s, short int, unsigned short int)
-LSARDEFINE(i, int, unsigned int)
-LSARDEFINE(l, long int, unsigned long int)
+SARLDEFINE(c, signed char, unsigned char)
+SARLDEFINE(s, short int, unsigned short int)
+SARLDEFINE(i, int, unsigned int)
+SARLDEFINE(l, long int, unsigned long int)
 
 #ifdef LLONG_MAX
-LSARDEFINE(ll, long long int, unsigned long long int)
+SARLDEFINE(ll, long long int, unsigned long long int)
 #endif
 
 #ifdef INT8_MAX
-LSARDEFINE(8, int8_t, uint8_t)
+SARLDEFINE(8, int8_t, uint8_t)
 #endif
 
 #ifdef INT16_MAX
-LSARDEFINE(16, int16_t, uint16_t)
+SARLDEFINE(16, int16_t, uint16_t)
 #endif
 
 #ifdef INT32_MAX
-LSARDEFINE(32, int32_t, uint32_t)
+SARLDEFINE(32, int32_t, uint32_t)
 #endif
 
 #ifdef INT64_MAX
-LSARDEFINE(64, int64_t, uint64_t)
+SARLDEFINE(64, int64_t, uint64_t)
 #endif
 
 #ifdef INTPTR_MAX
-LSARDEFINE(ptr, intptr_t, uintptr_t)
+SARLDEFINE(ptr, intptr_t, uintptr_t)
 #endif
 
 #ifdef INT_LEAST8_MIN
-LSARDEFINE(max, intmax_t, uintmax_t)
-LSARDEFINE(least8, int_least8_t, int_least8_t)
-LSARDEFINE(least16, int_least16_t, int_least16_t)
-LSARDEFINE(least32, int_least32_t, int_least32_t)
-LSARDEFINE(least64, int_least64_t, int_least64_t)
-LSARDEFINE(fast8, int_fast8_t, int_fast8_t)
-LSARDEFINE(fast16, int_fast16_t, int_fast16_t)
-LSARDEFINE(fast32, int_fast32_t, int_fast32_t)
-LSARDEFINE(fast64, int_fast64_t, int_fast64_t)
+SARLDEFINE(max, intmax_t, uintmax_t)
+SARLDEFINE(least8, int_least8_t, int_least8_t)
+SARLDEFINE(least16, int_least16_t, int_least16_t)
+SARLDEFINE(least32, int_least32_t, int_least32_t)
+SARLDEFINE(least64, int_least64_t, int_least64_t)
+SARLDEFINE(fast8, int_fast8_t, int_fast8_t)
+SARLDEFINE(fast16, int_fast16_t, int_fast16_t)
+SARLDEFINE(fast32, int_fast32_t, int_fast32_t)
+SARLDEFINE(fast64, int_fast64_t, int_fast64_t)
 #endif
 
 
@@ -106,45 +106,45 @@ testeq(signed char m, signed char n, signed char eq)
 #endif
 
     /* local versions which force logical shifts */
-    assert(Lsarc(m, n) == eq);
-    assert(Lsars(m, n) == eq);
-    assert(Lsari(m, n) == eq);
-    assert(Lsarl(m, n) == eq);
+    assert(sarLc(m, n) == eq);
+    assert(sarLs(m, n) == eq);
+    assert(sarLi(m, n) == eq);
+    assert(sarLl(m, n) == eq);
 
 #ifdef LLONG_MAX
-    assert(Lsarll(m, n) == eq);
+    assert(sarLll(m, n) == eq);
 #endif
 
 #ifdef INT8_MAX
-    assert(Lsar8(m, n) == eq);
+    assert(sarL8(m, n) == eq);
 #endif
 
 #ifdef INT16_MAX
-    assert(Lsar16(m, n) == eq);
+    assert(sarL16(m, n) == eq);
 #endif
 
 #ifdef INT32_MAX
-    assert(Lsar32(m, n) == eq);
+    assert(sarL32(m, n) == eq);
 #endif
 
 #ifdef INT64_MAX
-    assert(Lsar64(m, n) == eq);
+    assert(sarL64(m, n) == eq);
 #endif
 
 #ifdef INTPTR_MAX
-    assert(Lsarptr(m, n) == eq);
+    assert(sarLptr(m, n) == eq);
 #endif
 
 #ifdef INT_LEAST8_MIN
-    assert(Lsarmax(m, n) == eq);
-    assert(Lsarleast8(m, n) == eq);
-    assert(Lsarleast16(m, n) == eq);
-    assert(Lsarleast32(m, n) == eq);
-    assert(Lsarleast64(m, n) == eq);
-    assert(Lsarfast8(m, n) == eq);
-    assert(Lsarfast16(m, n) == eq);
-    assert(Lsarfast32(m, n) == eq);
-    assert(Lsarfast64(m, n) == eq);
+    assert(sarLmax(m, n) == eq);
+    assert(sarLleast8(m, n) == eq);
+    assert(sarLleast16(m, n) == eq);
+    assert(sarLleast32(m, n) == eq);
+    assert(sarLleast64(m, n) == eq);
+    assert(sarLfast8(m, n) == eq);
+    assert(sarLfast16(m, n) == eq);
+    assert(sarLfast32(m, n) == eq);
+    assert(sarLfast64(m, n) == eq);
 #endif
 }
 
@@ -170,10 +170,17 @@ main()
     for (i = 0; i < nchecks; ++i)
         testeq(checks[i][0], checks[i][1], checks[i][2]);
     
+    /* readme examples */
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000l, 1) == -0x100000000l);
 #ifdef INT_LEAST8_MIN
     assert(sarfast32(-0xDECAF, 8) == -0xDED);
+#endif
+    
+    assert(sarLi(-63, 3) == -8);
+    assert(sarLl(-0x200000000l, 1) == -0x100000000l);
+#ifdef INT_LEAST8_MIN
+    assert(sarLfast32(-0xDECAF, 8) == -0xDED);
 #endif
 
     return 0;
