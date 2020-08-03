@@ -6,17 +6,17 @@ Normal implementations choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `
 
 That is a **s**igned **a**rithmetic **r**ight shift (**sar**).
 
-The alternative 'logical' shift would return a large positive number.
+The alternative 'logical' shift would result in a large positive number.
 
-Functions in sar.c provide arithmetic right shift behaviour, whichever the implementation chooses.
+Functions in sar.c do some bit twiddling to provide portable arithmetic right shifts.
 ```c
 sari(-5, 1) == -3; /* true */
 ```
 They compile to small, branchless instructions (check on the [Compiler Explorer](https://godbolt.org/z/6PzT3h)).
 
-Standard integer types and provided, with compatibility back to pedantic C89.
+Standard integer types are supported, with compatibility back to pedantic C89.
 
-### Use
+## Use
 ```c
 #include "limits.h"
 #include "stdint.h" /* optional */
@@ -26,7 +26,8 @@ sari(-63, 3); /* -8 */
 sarl(-0x200000000l, 1); /* -0x100000000l */
 sarfast32(-0xDECAF, 8); /* -0xDED */
 ```
-### Test
+
+## Test
 ```bash
 make test
 ```
