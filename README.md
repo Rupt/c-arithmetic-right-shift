@@ -2,14 +2,16 @@
 
 The C programming language does not specify the value of  `-5 >> 1`.[1]
 
-Normal implementations sensibly choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `-INFINITY`.
-That is a **s**igned **a**rithmetic **r**ight shift (sar).[2]
+Normal implementations sensibly choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `-INFINITY`.[2]
+
+That is a **s**igned **a**rithmetic **r**ight shift (sar).
 
 Functions in sar.c provide arithmetic right shift behavior with more certainty.
 ```c
 sari(-5, 1) == -3; /* true */
 ```
 Compilation produces small and branchless instructions (check on the [Compiler Explorer](https://godbolt.org/z/6PzT3h)).
+
 Compatible back to C89.
 
 ### Use
