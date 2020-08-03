@@ -24,6 +24,7 @@ Standard integer types and provided, with compatibility back to pedantic C89.
 
 sari(-63, 3); /* -8 */
 sarl(-0x200000000l, 1); /* -0x100000000l */
+sarfast32(-0xDECAF, 8); /* -0xDED */
 ```
 ### Test
 ```bash

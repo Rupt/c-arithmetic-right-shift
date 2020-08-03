@@ -172,6 +172,9 @@ main()
     
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000l, 1) == -0x100000000l);
+#ifdef INT_LEAST8_MIN
+    assert(sarfast32(-0xDECAF, 8) == -0xDED);
+#endif
 
     return 0;
 }
