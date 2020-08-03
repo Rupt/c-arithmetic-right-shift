@@ -1,32 +1,33 @@
-/* Portable C arithmetic right shift (sar)
+/*
+ * Portable C arithmetic right shift (sar)
  *
- * The C specification leaves the right shift m >> n 
+ * The C specification leaves the right shift m >> n
  * implementation-defined if m is a negative integer.
  *     (ISO/IEC 9899:TC2 6.5.7:5, p84-85)
  *
  * The logical right shift inserts 0s in the high bits.
- * 
+ *
  * The arithmetic right shift inserts 1s in the high bits if the target
  * m is negative, but inserts 0s otherwise.
- * 
- * This preserves its sign, and makes 
+ *
+ * This preserves its sign, and makes
  *      m >> n  equal to  m/2**n ,
  * rounded towards -infinity.
- * 
+ *
  * The sar* functions below perform arithmetic right shifts, independent
  * of which shift is given by the implementation.
  *
- * They compile to the single shift instruction if the implementation 
+ * They compile to the single shift instruction if the implementation
  * provides it, and are always branchless and small.
  *
  * Context:
  *
  * limits.h
  *     CHAR_BIT LLONG_MAX
- * 
- * stdint.h 
- *     integer types and macros implied by their presence
- *  
+ *
+ * stdint.h
+ *     integer types, and macros implied by their presence
+ *
  * MIT LICENSE Copyright (c) 2020 Rupert Tombs
  */
 
@@ -79,12 +80,12 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
  *     label is the suffix to sar.
  *     type is the signed integer type.
  *     utype is the unsigned cousin of type with the same size as type.
- * 
+ *
  * Explanation:
  *     logical flags if the implementation logically right shifts type.
  *     fill is all 1s if the high bits need to be filled.
- * 
- * we then left shift fill (which is defined since it is unsigned) to 
+ *
+ * we then left shift fill (which is defined since it is unsigned) to
  * get 1s in the high bits, then logical or to set them.
  * The c standard re
  */
