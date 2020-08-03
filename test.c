@@ -169,14 +169,14 @@ main()
 
     for (i = 0; i < nchecks; ++i)
         testeq(checks[i][0], checks[i][1], checks[i][2]);
-    
+
     /* readme examples */
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000l, 1) == -0x100000000l);
 #ifdef INT_LEAST8_MIN
     assert(sarfast32(-0xDECAF, 8) == -0xDED);
 #endif
-    
+
     assert(sarLi(-63, 3) == -8);
     assert(sarLl(-0x200000000l, 1) == -0x100000000l);
 #ifdef INT_LEAST8_MIN

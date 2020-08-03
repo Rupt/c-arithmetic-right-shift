@@ -8,7 +8,7 @@ That is a **s**igned **a**rithmetic **r**ight shift (**sar**).
 
 The alternative 'logical' shift would return a large positive number.
 
-Functions in sar.c provide arithmetic right shift behaviour.
+Functions in sar.c provide arithmetic right shift behaviour, whichever the implementation chooses.
 ```c
 sari(-5, 1) == -3; /* true */
 ```
@@ -34,4 +34,4 @@ make test
 ___
 ¹ "The result of `E1 >> E2` is `E1` right-shifted `E2` bit positions. ... If `E1` has a signed type and a negative value, the resulting value is implementation-defined." ISO/IEC 9899:TC2 6.5.7, p84-85
 
-² Making this code normally useless. Perhaps it can claim to be mostly harmless.
+² Making this code mostly useless, but hopefully also mostly harmless.
