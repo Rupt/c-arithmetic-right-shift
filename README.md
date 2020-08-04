@@ -30,10 +30,7 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 <details>
 <summary>Details</summary>
 
-Functions and macros defined by sar.c are listed here.
-
-Static is used to reduce the exposed clutter;
-please define wrappers if you want external linkage.
+Functions defined by sar.c are listed here.
 ```C
 /* standard integer types */
 static signed char sarc(signed char m, signed char n);
@@ -61,8 +58,12 @@ static int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
 static int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
 static int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
 static int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
+```
+Static is used to reduce the exposed clutter;
+please define wrappers if you want external linkage.
 
-
+The following macros are also defined.
+```C
 /* for use with external include guards */
 #define SAR_C
 
