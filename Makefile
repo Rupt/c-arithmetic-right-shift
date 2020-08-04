@@ -2,6 +2,10 @@ CC=cc
 CXX=c++
 CFLAGS=-Wall -Wextra -pedantic -Werror
 
+options:
+	@echo "CC=${CC}"
+	@echo "CXX=${CXX}"
+	@echo "CFLAGS=${CFLAGS}"
 
 clean:
 	rm -f test
@@ -18,4 +22,4 @@ test: test.c sar.c
 	./$@
 
 
-.PHONY: clean test
+.PHONY: clean test options
