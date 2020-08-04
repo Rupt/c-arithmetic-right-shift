@@ -36,33 +36,33 @@ short int sars(short int m, short int n);
 int sari(int m, int n);
 long int sarl(long int m, long int n);
 
-#ifdef LLONG_MAX
+#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
 long long int sarll(long long int m, long long int n);
 #endif
 
 /* exact-width integers optionally provided by stdint.h */
-#ifdef INT8_MAX
+#if defined(INT8_MAX)
 int8_t sar8(int8_t m, int8_t n);
 #endif
 
-#ifdef INT16_MAX
+#if defined(INT16_MAX)
 int16_t sar16(int16_t m, int16_t n);
 #endif
 
-#ifdef INT32_MAX
+#if defined(INT32_MAX)
 int32_t sar32(int32_t m, int32_t n);
 #endif
 
-#ifdef INT64_MAX
+#if defined(INT64_MAX)
 int64_t sar64(int64_t m, int64_t n);
 #endif
 
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX)
 intptr_t sarptr(intptr_t m, intptr_t n);
 #endif
 
 /* integers necessarily provided by stdint.h if included */
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
 intmax_t sarmax(intmax_t m, intmax_t n);
 int_least8_t sarleast8(int_least8_t m, int_least8_t n);
 int_least16_t sarleast16(int_least16_t m, int_least16_t n);
@@ -105,31 +105,31 @@ SARDEFINE(s, short int, unsigned short int)
 SARDEFINE(i, int, unsigned int)
 SARDEFINE(l, long int, unsigned long int)
 
-#ifdef LLONG_MAX
+#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
 SARDEFINE(ll, long long int, unsigned long long int)
 #endif
 
-#ifdef INT8_MAX
+#if defined(INT8_MAX)
 SARDEFINE(8, int8_t, uint8_t)
 #endif
 
-#ifdef INT16_MAX
+#if defined(INT16_MAX)
 SARDEFINE(16, int16_t, uint16_t)
 #endif
 
-#ifdef INT32_MAX
+#if defined(INT32_MAX)
 SARDEFINE(32, int32_t, uint32_t)
 #endif
 
-#ifdef INT64_MAX
+#if defined(INT64_MAX)
 SARDEFINE(64, int64_t, uint64_t)
 #endif
 
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX)
 SARDEFINE(ptr, intptr_t, uintptr_t)
 #endif
 
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
 SARDEFINE(max, intmax_t, uintmax_t)
 SARDEFINE(least8, int_least8_t, int_least8_t)
 SARDEFINE(least16, int_least16_t, int_least16_t)

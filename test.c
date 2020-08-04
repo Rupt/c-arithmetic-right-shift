@@ -1,7 +1,15 @@
 /* Attempt to find errors in sar.c */
-#include <assert.h>
-#include <limits.h>
-#include <stdint.h>
+#if !defined(__cplusplus)
+#   include <assert.h>
+#   include <limits.h>
+#   include <stdint.h>
+#else
+#   include <cassert>
+#   include <climits>
+#   if __cplusplus >= 201103L
+#       include <cstdint>
+#   endif
+#endif
 #include "sar.c"
 
 /*
@@ -23,31 +31,31 @@ SARLDEFINE(s, short int, unsigned short int)
 SARLDEFINE(i, int, unsigned int)
 SARLDEFINE(l, long int, unsigned long int)
 
-#ifdef LLONG_MAX
+#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
 SARLDEFINE(ll, long long int, unsigned long long int)
 #endif
 
-#ifdef INT8_MAX
+#if defined(INT8_MAX)
 SARLDEFINE(8, int8_t, uint8_t)
 #endif
 
-#ifdef INT16_MAX
+#if defined(INT16_MAX)
 SARLDEFINE(16, int16_t, uint16_t)
 #endif
 
-#ifdef INT32_MAX
+#if defined(INT32_MAX)
 SARLDEFINE(32, int32_t, uint32_t)
 #endif
 
-#ifdef INT64_MAX
+#if defined(INT64_MAX)
 SARLDEFINE(64, int64_t, uint64_t)
 #endif
 
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX)
 SARLDEFINE(ptr, intptr_t, uintptr_t)
 #endif
 
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
 SARLDEFINE(max, intmax_t, uintmax_t)
 SARLDEFINE(least8, int_least8_t, int_least8_t)
 SARLDEFINE(least16, int_least16_t, int_least16_t)
@@ -69,31 +77,31 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sari(m, n) == eq);
     assert(sarl(m, n) == eq);
 
-#ifdef LLONG_MAX
+#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
     assert(sarll(m, n) == eq);
 #endif
 
-#ifdef INT8_MAX
+#if defined(INT8_MAX)
     assert(sar8(m, n) == eq);
 #endif
 
-#ifdef INT16_MAX
+#if defined(INT16_MAX)
     assert(sar16(m, n) == eq);
 #endif
 
-#ifdef INT32_MAX
+#if defined(INT32_MAX)
     assert(sar32(m, n) == eq);
 #endif
 
-#ifdef INT64_MAX
+#if defined(INT64_MAX)
     assert(sar64(m, n) == eq);
 #endif
 
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX)
     assert(sarptr(m, n) == eq);
 #endif
 
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
     assert(sarmax(m, n) == eq);
     assert(sarleast8(m, n) == eq);
     assert(sarleast16(m, n) == eq);
@@ -111,31 +119,31 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sarLi(m, n) == eq);
     assert(sarLl(m, n) == eq);
 
-#ifdef LLONG_MAX
+#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
     assert(sarLll(m, n) == eq);
 #endif
 
-#ifdef INT8_MAX
+#if defined(INT8_MAX)
     assert(sarL8(m, n) == eq);
 #endif
 
-#ifdef INT16_MAX
+#if defined(INT16_MAX)
     assert(sarL16(m, n) == eq);
 #endif
 
-#ifdef INT32_MAX
+#if defined(INT32_MAX)
     assert(sarL32(m, n) == eq);
 #endif
 
-#ifdef INT64_MAX
+#if defined(INT64_MAX)
     assert(sarL64(m, n) == eq);
 #endif
 
-#ifdef INTPTR_MAX
+#if defined(INTPTR_MAX)
     assert(sarLptr(m, n) == eq);
 #endif
 
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
     assert(sarLmax(m, n) == eq);
     assert(sarLleast8(m, n) == eq);
     assert(sarLleast16(m, n) == eq);
@@ -152,6 +160,7 @@ testeq(signed char m, signed char n, signed char eq)
 int
 main()
 {
+    /* some examples small enough to fit 8-bit signed char */
     signed char checks[][3] = {
         /* negative */
         {-1, 1, -1},
@@ -173,13 +182,13 @@ main()
     /* readme examples */
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000l, 1) == -0x100000000l);
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
     assert(sarfast32(-0xDECAF, 8) == -0xDED);
 #endif
 
     assert(sarLi(-63, 3) == -8);
     assert(sarLl(-0x200000000l, 1) == -0x100000000l);
-#ifdef INT_LEAST8_MIN
+#if defined(INT_LEAST8_MIN)
     assert(sarLfast32(-0xDECAF, 8) == -0xDED);
 #endif
 
