@@ -28,7 +28,8 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 ```
 
 <details>
-  <summary>Details</summary>
+<summary>Details</summary>
+
 ```C
 /* standard integer types */
 signed char sarc(signed char m, signed char n);
@@ -63,7 +64,8 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
 </details>
 
 <details>
-  <summary>Brain too big for C</summary>
+<summary>Brain too big for C</summary>
+
 ```C++
 #include <climits>
 #include <cstdint> /* optional, since C++11 */
