@@ -18,7 +18,7 @@
  * redefine sar.c functions prefixed with and L to test this.
  */
 #define SARLDEFINE(label, type, utype)                                 \
-    static type                                                               \
+    static type                                                        \
     sarL##label(type m, type n)                                        \
     {                                                                  \
         const type logical = ((utype)-1 >> 1) > 0;                     \

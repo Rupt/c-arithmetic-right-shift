@@ -126,7 +126,7 @@ static int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
  * get 1s in the high bits, then logical or to set them.
  */
 #define SARDEFINE(label, type, utype)                                  \
-    static type                                                               \
+    static type                                                        \
     sar##label(type m, type n)                                         \
     {                                                                  \
         const int logical = ((type)-1 >> 1) > 0;                       \
