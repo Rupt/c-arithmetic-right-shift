@@ -4,7 +4,7 @@ The C programming language does not specify the value of  `-5 >> 1`.¹
 
 Normal implementations choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `-INFINITY`.²
 
-That is a **s**igned **a**rithmetic **r**ight shift (**sar**).
+That is a **s**igned **a**rithmetic **r**ight shift ([sar](https://github.com/Rupt/c-arithmetic-right-shift)).
 
 The alternative 'logical' shift would result in a large positive number.
 
