@@ -31,6 +31,8 @@
  * MIT LICENSE Copyright (c) 2020 Rupert Tombs
  */
 
+#define SAR_C
+
 /* macros to decide which functions we define */
 #ifdef LLONG_MAX
 #    if !defined(__cplusplus) || __cplusplus >= 201103L
@@ -64,47 +66,47 @@
 
 
 /* decalarations for documentation */
-signed char sarc(signed char m, signed char n);
-short int sars(short int m, short int n);
-int sari(int m, int n);
-long int sarl(long int m, long int n);
+static signed char sarc(signed char m, signed char n);
+static short int sars(short int m, short int n);
+static int sari(int m, int n);
+static long int sarl(long int m, long int n);
 
 #ifdef SARLL
-long long int sarll(long long int m, long long int n);
+static long long int sarll(long long int m, long long int n);
 #endif
 
 /* exact-width integers optionally provided by stdint.h */
 #ifdef SAR8
-int8_t sar8(int8_t m, int8_t n);
+static int8_t sar8(int8_t m, int8_t n);
 #endif
 
 #ifdef SAR16
-int16_t sar16(int16_t m, int16_t n);
+static int16_t sar16(int16_t m, int16_t n);
 #endif
 
 #ifdef SAR32
-int32_t sar32(int32_t m, int32_t n);
+static int32_t sar32(int32_t m, int32_t n);
 #endif
 
 #ifdef SAR64
-int64_t sar64(int64_t m, int64_t n);
+static int64_t sar64(int64_t m, int64_t n);
 #endif
 
 #ifdef SARPTR
-intptr_t sarptr(intptr_t m, intptr_t n);
+static intptr_t sarptr(intptr_t m, intptr_t n);
 #endif
 
 /* integers necessarily provided by stdint.h if included */
 #ifdef SARINT
-intmax_t sarmax(intmax_t m, intmax_t n);
-int_least8_t sarleast8(int_least8_t m, int_least8_t n);
-int_least16_t sarleast16(int_least16_t m, int_least16_t n);
-int_least32_t sarleast32(int_least32_t m, int_least32_t n);
-int_least64_t sarleast64(int_least64_t m, int_least64_t n);
-int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
-int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
-int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
-int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
+static intmax_t sarmax(intmax_t m, intmax_t n);
+static int_least8_t sarleast8(int_least8_t m, int_least8_t n);
+static int_least16_t sarleast16(int_least16_t m, int_least16_t n);
+static int_least32_t sarleast32(int_least32_t m, int_least32_t n);
+static int_least64_t sarleast64(int_least64_t m, int_least64_t n);
+static int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
+static int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
+static int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
+static int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
 #endif
 
 
@@ -124,7 +126,7 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
  * get 1s in the high bits, then logical or to set them.
  */
 #define SARDEFINE(label, type, utype)                                  \
-    type                                                               \
+    static type                                                               \
     sar##label(type m, type n)                                         \
     {                                                                  \
         const int logical = ((type)-1 >> 1) > 0;                       \

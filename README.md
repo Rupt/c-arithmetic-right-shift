@@ -30,53 +30,75 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 <details>
 <summary>Details</summary>
 
+Functions and macros defined by sar.c are listed here.
+
+Static is used to reduce the exposed clutter;
+please define wrappers if you want external linkage.
 ```C
 /* standard integer types */
-signed char sarc(signed char m, signed char n);
-short int sars(short int m, short int n);
-int sari(int m, int n);
-long int sarl(long int m, long int n);
+static signed char sarc(signed char m, signed char n);
+static short int sars(short int m, short int n);
+static int sari(int m, int n);
+static long int sarl(long int m, long int n);
 
 /* since C99 (or C++11) */
-long long int sarll(long long int m, long long int n);
+static long long int sarll(long long int m, long long int n);
+
+/* types optionally included by stdint.h */
+static int8_t sar8(int8_t m, int8_t n);
+static int16_t sar16(int16_t m, int16_t n);
+static int32_t sar32(int32_t m, int32_t n);
+static int64_t sar64(int64_t m, int64_t n);
+static intptr_t sarptr(intptr_t m, intptr_t n);
+
+/* types necessarily included by stdint.h */
+static intmax_t sarmax(intmax_t m, intmax_t n);
+static int_least8_t sarleast8(int_least8_t m, int_least8_t n);
+static int_least16_t sarleast16(int_least16_t m, int_least16_t n);
+static int_least32_t sarleast32(int_least32_t m, int_least32_t n);
+static int_least64_t sarleast64(int_least64_t m, int_least64_t n);
+static int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
+static int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
+static int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
+static int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
+
+
+/* for use with external include guards */
+#define SAR_C
+
+/* if sarll is defined */
 #define SARLL
 
-/* if stdint.h provides each of */
-int8_t sar8(int8_t m, int8_t n);
+/* if corresponding optional stdint.h functions are defined */
 #define SAR8
-int16_t sar16(int16_t m, int16_t n);
 #define SAR16
-int32_t sar32(int32_t m, int32_t n);
 #define SAR32
-int64_t sar64(int64_t m, int64_t n);
 #define SAR64
-intptr_t sarptr(intptr_t m, intptr_t n);
 #define SARPTR
 
-/* if stdint.h is included */
-intmax_t sarmax(intmax_t m, intmax_t n);
-int_least8_t sarleast8(int_least8_t m, int_least8_t n);
-int_least16_t sarleast16(int_least16_t m, int_least16_t n);
-int_least32_t sarleast32(int_least32_t m, int_least32_t n);
-int_least64_t sarleast64(int_least64_t m, int_least64_t n);
-int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
-int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
-int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
-int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
+/* if other stdint.h functions are defined */
 #define SARINT
 
-/* macro used to define these functions */
+/* to define the above functions, or your addition */
 #define SARDEFINE(label, type, utype)
 ```
 </details>
 
 <details>
-<summary>Help, I am forced to use C++</summary>
+<summary>I am forced to use C++</summary>
 
+C++ is supported.
 ```C++
 #include <climits>
 #include <cstdint> /* optional, since C++11 */
 #include "sar.c"
+```
+
+You can avoid some name mangling problems like so.
+```C++
+extern "C" {
+#include "sar.c"
+}
 ```
 </details>
 
