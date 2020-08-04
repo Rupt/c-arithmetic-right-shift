@@ -83,6 +83,13 @@ The following macros are also defined.
 /* to define the above functions, or your addition */
 #define SARDEFINE(label, type, utype)
 ```
+
+An external include guard looks like this.
+```C
+#ifndef SAR_C
+#include "sar.c"
+#endif
+```
 </details>
 
 <details>
