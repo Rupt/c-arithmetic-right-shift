@@ -31,38 +31,75 @@
  * MIT LICENSE Copyright (c) 2020 Rupert Tombs
  */
 
+/* macros to decide which functions we define */
+#ifndef __cplusplus
+#    if defined(LLONG_MAX)
+#        define SARLL
+#    endif
+#else
+#    if __cplusplus >= 201103L
+#        define SARLL
+#    endif
+#endif
+
+#ifdef INT8_MAX
+#    define SAR8
+#endif
+
+#ifdef INT16_MAX
+#    define SAR16
+#endif
+
+#ifdef INT32_MAX
+#    define SAR32
+#endif
+
+#ifdef INT64_MAX
+#    define SAR64
+#endif
+
+#ifdef INTPTR_MAX
+#    define SARPTR
+#endif
+
+#ifdef INT_LEAST8_MAX
+#    define SARINT
+#endif
+
+
+/* decalarations for documentation */
 signed char sarc(signed char m, signed char n);
 short int sars(short int m, short int n);
 int sari(int m, int n);
 long int sarl(long int m, long int n);
 
-#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
+#ifdef SARLL
 long long int sarll(long long int m, long long int n);
 #endif
 
 /* exact-width integers optionally provided by stdint.h */
-#if defined(INT8_MAX)
+#ifdef SAR8
 int8_t sar8(int8_t m, int8_t n);
 #endif
 
-#if defined(INT16_MAX)
+#ifdef SAR16
 int16_t sar16(int16_t m, int16_t n);
 #endif
 
-#if defined(INT32_MAX)
+#ifdef SAR32
 int32_t sar32(int32_t m, int32_t n);
 #endif
 
-#if defined(INT64_MAX)
+#ifdef SAR64
 int64_t sar64(int64_t m, int64_t n);
 #endif
 
-#if defined(INTPTR_MAX)
+#ifdef SARPTR
 intptr_t sarptr(intptr_t m, intptr_t n);
 #endif
 
 /* integers necessarily provided by stdint.h if included */
-#if defined(INT_LEAST8_MIN)
+#ifdef SARINT
 intmax_t sarmax(intmax_t m, intmax_t n);
 int_least8_t sarleast8(int_least8_t m, int_least8_t n);
 int_least16_t sarleast16(int_least16_t m, int_least16_t n);
@@ -105,31 +142,31 @@ SARDEFINE(s, short int, unsigned short int)
 SARDEFINE(i, int, unsigned int)
 SARDEFINE(l, long int, unsigned long int)
 
-#if defined(LLONG_MAX) && !(__cplusplus < 201103L)
+#ifdef SARLL
 SARDEFINE(ll, long long int, unsigned long long int)
 #endif
 
-#if defined(INT8_MAX)
+#ifdef SAR8
 SARDEFINE(8, int8_t, uint8_t)
 #endif
 
-#if defined(INT16_MAX)
+#ifdef SAR16
 SARDEFINE(16, int16_t, uint16_t)
 #endif
 
-#if defined(INT32_MAX)
+#ifdef SAR32
 SARDEFINE(32, int32_t, uint32_t)
 #endif
 
-#if defined(INT64_MAX)
+#ifdef SAR64
 SARDEFINE(64, int64_t, uint64_t)
 #endif
 
-#if defined(INTPTR_MAX)
+#ifdef SARPTR
 SARDEFINE(ptr, intptr_t, uintptr_t)
 #endif
 
-#if defined(INT_LEAST8_MIN)
+#ifdef SARINT
 SARDEFINE(max, intmax_t, uintmax_t)
 SARDEFINE(least8, int_least8_t, int_least8_t)
 SARDEFINE(least16, int_least16_t, int_least16_t)

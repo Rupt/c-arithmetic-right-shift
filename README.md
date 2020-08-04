@@ -64,11 +64,12 @@ int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
 </details>
 
 <details>
-<summary>Brain too big for C</summary>
+<summary>If coerced into C++</summary>
 
 ```C++
 #include <climits>
 #include <cstdint> /* optional, since C++11 */
+#include "sar.c"
 ```
 </details>
 
