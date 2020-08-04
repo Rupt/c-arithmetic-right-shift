@@ -32,12 +32,8 @@
  */
 
 /* macros to decide which functions we define */
-#ifndef __cplusplus
-#    if defined(LLONG_MAX)
-#        define SARLL
-#    endif
-#else
-#    if __cplusplus >= 201103L
+#if defined(LLONG_MAX)
+#    if !defined(__cplusplus) || __cplusplus >= 201103L
 #        define SARLL
 #    endif
 #endif
