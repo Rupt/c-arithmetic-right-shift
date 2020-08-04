@@ -37,17 +37,24 @@ short int sars(short int m, short int n);
 int sari(int m, int n);
 long int sarl(long int m, long int n);
 
-/* since C99 */
+/* since C99 (or C++11) */
+#define SARLL
 long long int sarll(long long int m, long long int n);
 
-/* if stdint.h provides */
+/* if stdint.h provides each of */
+#define SAR8
 int8_t sar8(int8_t m, int8_t n);
+#define SAR16
 int16_t sar16(int16_t m, int16_t n);
+#define SAR32
 int32_t sar32(int32_t m, int32_t n);
+#define SAR64
 int64_t sar64(int64_t m, int64_t n);
+#define SARPTR
 intptr_t sarptr(intptr_t m, intptr_t n);
 
-/* if stdint.h */
+/* if stdint.h is imported */
+#define SARINT
 intmax_t sarmax(intmax_t m, intmax_t n);
 int_least8_t sarleast8(int_least8_t m, int_least8_t n);
 int_least16_t sarleast16(int_least16_t m, int_least16_t n);
