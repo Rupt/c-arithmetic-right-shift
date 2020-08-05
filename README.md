@@ -29,7 +29,7 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 ```
 
 <details>
-<summary>Details</summary>
+<summary><b>Details</b></summary>
 
 Arithmetic right shift functions defined by "sar.c" are of the form
 ```C
@@ -89,7 +89,7 @@ with the prefix `saru#`.
 </details>
 
 <details>
-<summary>I am forced to use C++</summary>
+<summary><b>I am forced to use C++</b></summary>
 
 C++11 is supported.
 ```C++
