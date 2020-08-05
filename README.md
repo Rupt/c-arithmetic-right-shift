@@ -84,8 +84,8 @@ An external include guard looks like this.
 #include "sar.c"
 #endif
 ```
-Alternatives which force underlying logical shifts are defined in "saru.c"
-with the prefix `saru#`.
+Alternatives which force logical shifts, then correct them back,
+are defined in "saru.c" with the prefix `saru#`.
 </details>
 
 <details>
