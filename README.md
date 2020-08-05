@@ -12,9 +12,8 @@ Functions in sar.c do some bit twiddling to provide portable arithmetic right sh
 ```C
 sari(-5, 1) == -3; /* true */
 ```
-They compile to small, branchless instructions.
-
-See for yourself on the [Compiler Explorer](https://godbolt.org/z/GsTE6G).
+They compile to small, branchless instructions. 
+See for yourself on the [Compiler Explorer](https://godbolt.org/z/hvrY6e).
 
 Standard integer types are supported for pedantic C99.
 
