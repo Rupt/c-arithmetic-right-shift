@@ -68,13 +68,13 @@ The following macros are also defined.
 /* Use external include guards. */
 #define SAR_C
 
-/* Type-independent macro which will duplicate side effects (unsafe). */
-#define sarshift(m, n)
+/* Macro which will duplicate side effects (unsafe). */
+#define sarshift(m, n, type)
 
-/* Used in construction of sarshift */
-#define sarlogical(m)
-#define sardo(m)
-#define sarhigh(m, n)
+/* Used to construct sarshift */
+#define sarlogical(type)
+#define sardo(type)
+#define sarhigh(m, n, type)
 ```
 
 An external include guard looks like this.
