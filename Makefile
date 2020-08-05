@@ -11,7 +11,7 @@ clean:
 	rm -f test
 
 
-test: test.c sar.c
+test: test.c sar.c saru.c
 	$(CC) test.c -o $@ $(CFLAGS) -std=c99
 	./$@
 	$(CXX) test.c -o $@ $(CFLAGS) -std=c++11

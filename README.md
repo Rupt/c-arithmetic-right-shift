@@ -31,7 +31,7 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 <details>
 <summary>Details</summary>
 
-Functions defined by sar.c are of the form
+Arithmetic right shift functions defined by "sar.c" are of the form
 ```C
 static type sar#(type m, uint_fast8_t n);
 ```
@@ -84,6 +84,8 @@ An external include guard looks like this.
 #include "sar.c"
 #endif
 ```
+Alternatives which force underlying logical shifts are defined in "saru.c"
+with the prefix `saru#`.
 </details>
 
 <details>
