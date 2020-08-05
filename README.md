@@ -12,14 +12,15 @@ Functions in sar.c do some bit twiddling to provide portable arithmetic right sh
 ```C
 sari(-5, 1) == -3; /* true */
 ```
-They compile to small, branchless instructions. See for yourself on the [Compiler Explorer](https://godbolt.org/z/978xs5).
+They compile to small, branchless instructions.
 
-Standard integer types are supported, with compatibility back to pedantic C89.
+See for yourself on the [Compiler Explorer](https://godbolt.org/z/Yj3KPn).
+
+Standard integer types are supported for pedantic C99.
 
 ## Use
 ```C
-#include "limits.h"
-#include "stdint.h" /* optional */
+#include "stdint.h"
 #include "sar.c"
 
 sari(-63, 3); /* -8 */
@@ -30,58 +31,51 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 <details>
 <summary>Details</summary>
 
-Functions defined by sar.c are listed here.
+Functions defined by sar.c are of the form
 ```C
-/* standard integer types */
-static signed char sarc(signed char m, signed char n);
-static short int sars(short int m, short int n);
-static int sari(int m, int n);
-static long int sarl(long int m, long int n);
+static type sar#(type m, uint_fast8_t n);
+```
+where `type` is any of these types:
+```C
+signed char   /* sarc */
+short         /* sars */
+int           /* sari */
+long int      /* sarl */
+long long int /* sarll */
 
-/* since C99 (or C++11) */
-static long long int sarll(long long int m, long long int n);
+/* included in stdint.h */
+int_fast8_t   /* sarfast8 */
+int_fast16_t  /* sarfast16 */
+int_fast32_t  /* sarfast32 */
+int_fast64_t  /* sarfast64 */
+int_least8_t  /* sarleast8 */
+int_least16_t /* sarleast16 */
+int_least32_t /* sarleast32 */
+int_least64_t /* sarleast64 */
+intmax_t      /* sarmax */
 
-/* types optionally included by stdint.h */
-static int8_t sar8(int8_t m, int8_t n);
-static int16_t sar16(int16_t m, int16_t n);
-static int32_t sar32(int32_t m, int32_t n);
-static int64_t sar64(int64_t m, int64_t n);
-static intptr_t sarptr(intptr_t m, intptr_t n);
-
-/* types necessarily included by stdint.h */
-static intmax_t sarmax(intmax_t m, intmax_t n);
-static int_least8_t sarleast8(int_least8_t m, int_least8_t n);
-static int_least16_t sarleast16(int_least16_t m, int_least16_t n);
-static int_least32_t sarleast32(int_least32_t m, int_least32_t n);
-static int_least64_t sarleast64(int_least64_t m, int_least64_t n);
-static int_fast8_t sarfast8(int_fast8_t m, int_fast8_t n);
-static int_fast16_t sarfast16(int_fast16_t m, int_fast16_t n);
-static int_fast32_t sarfast32(int_fast32_t m, int_fast32_t n);
-static int_fast64_t sarfast64(int_fast64_t m, int_fast64_t n);
+/* optionally included in stdint.h */
+int8_t        /* sar8 */
+int16_t       /* sar16 */
+int32_t       /* sar32 */
+int64_t       /* sar64 */
+intptr_t      /* sarptr */
 ```
 Static is used to reduce the exposed clutter;
 please define wrappers if you want external linkage.
 
 The following macros are also defined.
 ```C
-/* for use with external include guards */
+/* Use external include guards. */
 #define SAR_C
 
-/* if sarll is defined */
-#define SARLL
+/* Type-independent macro which will duplicate side effects (unsafe). */
+#define sarshift(m, n)
 
-/* if corresponding optional stdint.h functions are defined */
-#define SAR8
-#define SAR16
-#define SAR32
-#define SAR64
-#define SARPTR
-
-/* if other stdint.h functions are defined */
-#define SARINT
-
-/* to define the above functions, or your addition */
-#define SARDEFINE(label, type, utype)
+/* Used in construction of sarshift */
+#define sarlogical(m)
+#define sardo(m)
+#define sarhigh(m, n)
 ```
 
 An external include guard looks like this.
@@ -95,10 +89,9 @@ An external include guard looks like this.
 <details>
 <summary>I am forced to use C++</summary>
 
-C++ is supported.
+C++11 is supported.
 ```C++
-#include <climits>
-#include <cstdint> /* optional, since C++11 */
+#include <cstdint>
 #include "sar.c"
 ```
 
