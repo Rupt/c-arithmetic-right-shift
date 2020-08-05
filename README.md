@@ -14,7 +14,7 @@ sari(-5, 1) == -3; /* true */
 ```
 They compile to small, branchless instructions.
 
-See for yourself on the [Compiler Explorer](https://godbolt.org/z/Yj3KPn).
+See for yourself on the [Compiler Explorer](https://godbolt.org/z/55xzGr).
 
 Standard integer types are supported for pedantic C99.
 
@@ -35,7 +35,7 @@ Functions defined by sar.c are of the form
 ```C
 static type sar#(type m, uint_fast8_t n);
 ```
-where `type` is any of these types:
+where `type` is any of:
 ```C
 signed char   /* sarc */
 short         /* sars */
