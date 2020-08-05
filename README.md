@@ -14,7 +14,7 @@ sari(-5, 1) == -3; /* true */
 ```
 They compile to small, branchless instructions.
 
-See for yourself on the [Compiler Explorer](https://godbolt.org/z/55xzGr).
+See for yourself on the [Compiler Explorer](https://godbolt.org/z/Yd43jr).
 
 Standard integer types are supported for pedantic C99.
 
