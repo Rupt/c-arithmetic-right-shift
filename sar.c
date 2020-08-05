@@ -38,8 +38,9 @@
  *
  * sarhigh sets its n high bits by a twiddle from sardo.
  *
- * sardo returns -1 (binary 1...1) if we need to set the high bits, with
- * the motif 0*(m) used for type casting.
+ * sardo returns -1 (binary 1...1) if we need to set the high bits, and
+ * 0 (binary 0...0) otherwise.
+ * The motif 0*(m) is used for type casting.
  *
  * sarlogical flags if the implementation provides a logical shift.
  */
