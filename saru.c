@@ -19,7 +19,7 @@
  * Force logical right shifts by casting to unsigned types.
  */
 #define SARUBODY(type, utype)                                          \
-    const utype logical = 1;                                           \
+    const utype logical = (((utype)-1) >> 1) > 0;                      \
     union {type i; utype u;} fix;                                      \
     fix.u = -(logical & (m < 0));                                      \
     return ((utype)m >> n) | (fix.u ^ (fix.u >> n))
