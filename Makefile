@@ -1,11 +1,13 @@
 CC=cc
 CXX=c++
-CFLAGS=-Wall -Wextra -pedantic -Werror
+CFLAGS=-Wall -Wextra -pedantic -Werror -fsanitize=undefined
+
 
 options:
 	@echo "CC=${CC}"
 	@echo "CXX=${CXX}"
 	@echo "CFLAGS=${CFLAGS}"
+
 
 clean:
 	rm -f test
