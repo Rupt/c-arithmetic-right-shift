@@ -13,7 +13,7 @@ Functions in sar.c do some bit twiddling to provide portable arithmetic right sh
 sari(-5, 1) == -3; /* true */
 ```
 They compile to small, branchless instructions. 
-See for yourself on the [Compiler Explorer](https://godbolt.org/z/hvrY6e).
+See for yourself on the [Compiler Explorer](https://godbolt.org/z/nnzb1v).
 
 Standard integer types are supported for pedantic C99.
 
@@ -32,7 +32,7 @@ sarfast32(-0xDECAF, 8); /* -0xDED */
 
 Arithmetic right shift functions defined by "sar.c" are of the form
 ```C
-static type sar#(type m, uint_fast8_t n);
+static type sar##(type m, uint_fast8_t n);
 ```
 where `type` is any of:
 ```C
@@ -68,23 +68,18 @@ The following macros are also defined.
 /* Use external include guards. */
 #define SAR_C
 
-/* Macro which will duplicate side effects (unsafe). */
-#define sarshift(m, n, type)
-
-/* Used to construct sarshift */
-#define sarlogical(type)
-#define sardo(type)
-#define sarhigh(m, n, type)
+/* Macro to define the sar## function bodies. Not standalone. */
+#define SARBODY(type, utype)
 ```
-
 An external include guard looks like this.
 ```C
 #ifndef SAR_C
 #include "sar.c"
 #endif
 ```
+
 Alternatives which force logical shifts, then correct them back,
-are defined in "saru.c" with the prefix `saru#`.
+are defined in "saru.c" with the prefixes `saru##` and `SARU`.
 </details>
 
 <details>
