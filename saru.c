@@ -20,9 +20,10 @@
  */
 #define SARUBODY(type, utype)                                          \
     const utype logical = (((utype)-1) >> 1) > 0;                      \
-    union {type i; utype u;} fix;                                      \
+    union {type i; utype u;} fix, sar;                                 \
     fix.u = -(logical & (m < 0));                                      \
-    return ((utype)m >> n) | (fix.u ^ (fix.u >> n))
+    sar.u = ((utype)m >> n) | (fix.u ^ (fix.u >> n));                  \
+    return sar.i
 
 
 static signed char
