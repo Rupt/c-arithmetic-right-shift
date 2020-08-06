@@ -20,4 +20,4 @@ test: test.c sar.c saru.c
 	./$@
 
 
-.PHONY: clean test options
+.PHONY: clean options
