@@ -51,7 +51,7 @@
  * Arguments type and utype are an integer and its unsigned equivalent.
  */
 #define SARBODY(type, utype)                                           \
-    const utype logical = (((type)-1) >> 1) > 0;                       \
+    const int logical = (((type)-1) >> 1) > 0;                         \
     union {type i; utype u;} fix;                                      \
     fix.u = -(logical & (m < 0));                                      \
     return (m >> n) | (fix.i ^ (fix.i >> n))
