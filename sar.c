@@ -34,6 +34,8 @@
  * Macro for the signed arithmetic shift function body.
  * Designed to be branchless with maximum portability.
  *
+ * Arguments type and utype are an integer and its unsigned equivalent.
+ *
  * Performs the implemented right shift, then fills in the high bits
  * if and only if needed.
  *
@@ -42,19 +44,18 @@
  * Bits in `fix' are set to binary 1...1 if the high fill is needed,
  * but to 0...0 otherwise.
  *
- * The motif (fix.i ^ (fix.i >> n)) twiddles 1s to the n high bits (and
- * 0s thereafter) if fix is 1...1, but is 0...0 otherwise.
+ * (fix ^ (fix >> n)) twiddles 1s to the n high bits (and 0s
+ * after) if fix is 1...1, but is 0...0 otherwise.
  *
- * The union is intended to avoid undefined or implementation-defined
- * behavior in representation of -1 and in casting unsigned to signed.
- *
- * Arguments type and utype are an integer and its unsigned equivalent.
+ * The mess *(type*)&fixu reinterprets the bits of fixu as signed.
+ * It is well defined since corresponding (un-)signed types are an 
+ * exception to strict aliasing rules.
  */
 #define SARBODY(type, utype)                                           \
     const int logical = (((type)-1) >> 1) > 0;                         \
-    union {type i; utype u;} fix;                                      \
-    fix.u = -(logical & (m < 0));                                      \
-    return (m >> n) | (fix.i ^ (fix.i >> n))
+    utype fixu = -(logical & (m < 0));                                 \
+    type fix = *(type*)&fixu;                                          \
+    return (m >> n) | (fix ^ (fix >> n))
 
 
 static signed char
