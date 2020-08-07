@@ -1,7 +1,8 @@
 CC=cc
 CXX=c++
-CFLAGS=-Wall -Wextra -pedantic -Werror -fsanitize=undefined
-
+CFLAGS=-Wall -Wextra -pedantic -Werror \
+	-fsanitize=undefined -fstrict-aliasing
+TEMP=.clang_cpp_test.cpp
 
 options:
 	@echo "CC=${CC}"
@@ -16,7 +17,7 @@ clean:
 test: test.c sar.c saru.c
 	$(CC) test.c -o $@ $(CFLAGS) -std=c99
 	./$@
-	$(CXX) test.c -o $@ $(CFLAGS) -std=c++11
+	$(CXX) -x c++ test.c -o $@ $(CFLAGS) -std=c++11
 	./$@
 
 
