@@ -112,10 +112,12 @@ main()
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000l, 1) == -0x100000000l);
     assert(sarfast32(-0xDECAF, 8) == -0xDED);
+    assert(sar8(15, 2) == 3);
 
     assert(sarui(-63, 3) == -8);
     assert(sarul(-0x200000000l, 1) == -0x100000000l);
     assert(sarufast32(-0xDECAF, 8) == -0xDED);
+    assert(saru8(15, 2) == 3);
 
     return 0;
 }

@@ -25,6 +25,7 @@ Standard integer types are supported for pedantic C99.
 sari(-63, 3); /* -8 */
 sarl(-0x200000000l, 1); /* -0x100000000l */
 sarfast32(-0xDECAF, 8); /* -0xDED */
+sar8(15, 2); /* 3 */
 ```
 
 <details>
