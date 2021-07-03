@@ -1,5 +1,7 @@
 # Portable C arithmetic right shift
 
+### Probably useless: check your implementation. This has no guarantees for exotic integer representations.
+
 The C programming language does not specify the value of  `-5 >> 1`.¹
 
 Normal implementations choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `-INFINITY`.²
@@ -12,8 +14,7 @@ Functions in sar.c do some bit twiddling to provide portable arithmetic right sh
 ```C
 sari(-5, 1) == -3; /* true */
 ```
-They compile to small, branchless instructions. 
-See for yourself on the [Compiler Explorer](https://godbolt.org/z/Pc6zcc).
+They compile to small, branchless instructions; see for yourself on the [Compiler Explorer](https://godbolt.org/z/Pc6zcc).
 
 Standard integer types are supported for pedantic C99.
 
@@ -84,9 +85,7 @@ are defined in "saru.c" with the prefixes `saru##` and `SARU`.
 </details>
 
 <details>
-<summary><b>I am forced to use C++</b></summary>
-
-C++11 is supported.
+<summary><b>C++ is supported</b></summary>
 ```C++
 #include <cstdint>
 #include "sar.c"
