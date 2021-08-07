@@ -10,6 +10,10 @@ test: test.c sar.c saru.c
 	./$@
 	$(CXX) -x c++ test.c -o $@ $(CFLAGS) -std=c++11
 	./$@
+	$(CC) test.c -o $@ $(CFLAGS) -std=c99 -DNSARSTDINT
+	./$@
+	$(CXX) -x c++ test.c -o $@ $(CFLAGS) -std=c++11 -DNSARSTDINT
+	./$@
 
 options:
 	@echo "CC=${CC}"

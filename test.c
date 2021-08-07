@@ -1,10 +1,14 @@
 /* Attempt to find errors in sar.c */
 #ifndef __cplusplus
-#    include <assert.h>
-#    include <stdint.h>
+#   include <assert.h>
+#   ifdef NSARSTDINT
+#       include <stdint.h>
+#   endif
 #else
-#    include <cassert>
-#    include <cstdint>
+#   include <cassert>
+#   ifdef NSARSTDINT
+#       include <cstdint>
+#   endif
 #endif
 #include "sar.c"
 #include "saru.c"
@@ -20,6 +24,7 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sarl(m, n) == eq);
     assert(sarll(m, n) == eq);
 
+#ifdef UINT_FAST8_MAX
     assert(sarfast8(m, n) == eq);
     assert(sarfast16(m, n) == eq);
     assert(sarfast32(m, n) == eq);
@@ -29,6 +34,7 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sarleast32(m, n) == eq);
     assert(sarleast64(m, n) == eq);
     assert(sarmax(m, n) == eq);
+#endif
 
 #ifdef INT8_MAX
     assert(sar8(m, n) == eq);
@@ -58,6 +64,7 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sarul(m, n) == eq);
     assert(sarull(m, n) == eq);
 
+#ifdef UINT_FAST8_MAX
     assert(sarufast8(m, n) == eq);
     assert(sarufast16(m, n) == eq);
     assert(sarufast32(m, n) == eq);
@@ -67,6 +74,7 @@ testeq(signed char m, signed char n, signed char eq)
     assert(saruleast32(m, n) == eq);
     assert(saruleast64(m, n) == eq);
     assert(sarumax(m, n) == eq);
+#endif
 
 #ifdef INT8_MAX
     assert(saru8(m, n) == eq);
@@ -123,13 +131,19 @@ main()
     /* readme examples */
     assert(sari(-63, 3) == -8);
     assert(sarl(-0x200000000L, 1) == -0x100000000L);
-    assert(sarfast32(-0xDECAF, 8) == -0xDED);
-    assert(sar8(15, 2) == 3);
+#ifdef UINT_FAST8_MAX
+     assert(sarfast32(-0xDECAF, 8) == -0xDED);
+#endif
+#ifdef INT8_MAX
+     assert(sar8(15, 2) == 3);
+#endif
 
     assert(sarui(-63, 3) == -8);
     assert(sarul(-0x200000000L, 1) == -0x100000000L);
-    assert(sarufast32(-0xDECAF, 8) == -0xDED);
-    assert(saru8(15, 2) == 3);
-
-    return 0;
+#ifdef UINT_FAST8_MAX
+     assert(sarufast32(-0xDECAF, 8) == -0xDED);
+#endif
+#ifdef INT8_MAX
+     assert(saru8(15, 2) == 3);
+#endif
 }
