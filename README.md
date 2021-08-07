@@ -24,7 +24,7 @@ Standard integer types are supported for pedantic C99 and C++11.
 
 ## Use
 ```C
-#include "stdint.h"
+#include "stdint.h" /* optional */
 #include "sar.c"
 
 sari(-63, 3); /* -8 */
