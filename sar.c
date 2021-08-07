@@ -49,7 +49,7 @@
  * to strict-aliasing rules.
  */
 #define SARBODY(type, utype)                                                   \
-    const int logical = (((type)-1) >> 1) > 0;                                 \
+    const int logical = (((type) -1) >> 1) > 0;                                 \
     utype fixu = -(logical & (m < 0));                                         \
     type fix = *(type*) &fixu;                                                 \
     return (m >> n) | (fix ^ (fix >> n))
