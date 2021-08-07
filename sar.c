@@ -1,17 +1,14 @@
 /*
  * Portable C signed arithmetic right shift (sar)
  *
- * The C specification leaves the right shift m >> n
- * implementation-defined if m is a negative integer.
- *     (ISO/IEC 9899:TC2 6.5.7:5, p84-85)
+ * The C standard makes  m >> n  implementation-defined if m is negative.
+ *                                                    (ISO C N2176 6.5.7 6.5.7)
  *
  * The logical right shift inserts 0s in its high binary bits.
  *
  * The arithmetic right shift inserts 1s in the high bits if the target
- * m is negative, but inserts 0s otherwise.
- *
- * This preserves its sign, and makes
- *      m >> n  equal to  m/2**n ,
+ * m is negative, but inserts 0s otherwise. This preserves its sign, so
+ *      m >> n  equals  m / 2**n ,
  * rounded towards -ININITY.
  *
  * The sar* functions below perform arithmetic right shifts, independent
@@ -27,7 +24,7 @@
  * MIT LICENSE Copyright (c) 2020 Rupert Tombs
  */
 
-/* Use external include guards. */
+#ifndef SAR_C
 #define SAR_C
 
 /*
@@ -47,105 +44,107 @@
  * (fix ^ (fix >> n)) twiddles 1s to the n high bits (and 0s
  * after) if fix is 1...1, but is 0...0 otherwise.
  *
- * The mess *(type*)&fixu reinterprets the bits of fixu as signed.
- * It is well defined since corresponding (un-)signed types are an 
- * exception to strict aliasing rules.
+ * The *(type*) &fixu pun reinterprets the bits of fixu as signed.
+ * It is well defined since corresponding (un-)signed types are an exception
+ * to strict-aliasing rules.
  */
-#define SARBODY(type, utype)                                           \
-    const int logical = (((type)-1) >> 1) > 0;                         \
-    utype fixu = -(logical & (m < 0));                                 \
-    type fix = *(type*)&fixu;                                          \
+#define SARBODY(type, utype)                                                   \
+    const int logical = (((type)-1) >> 1) > 0;                                 \
+    utype fixu = -(logical & (m < 0));                                         \
+    type fix = *(type*) &fixu;                                                 \
     return (m >> n) | (fix ^ (fix >> n))
 
 
-static signed char
+static inline signed char
 sarc(signed char m, uint_fast8_t n)
 {
     SARBODY(signed char, unsigned char);
 }
 
-static short int
+static inline short int
 sars(short int m, uint_fast8_t n)
 {
     SARBODY(short int, unsigned short int);
 }
 
-static int
+static inline int
 sari(int m, uint_fast8_t n)
 {
     SARBODY(int, unsigned int);
 }
 
-static long int
+static inline long int
 sarl(long int m, uint_fast8_t n)
 {
     SARBODY(long int, unsigned long int);
 }
 
-static long long int
+static inline long long int
 sarll(long long int m, uint_fast8_t n)
 {
     SARBODY(long long int, unsigned long long int);
 }
 
 /* included in stdint.h */
-static int_fast8_t
+#ifdef UINT_FAST8_MAX
+static inline int_fast8_t
 sarfast8(int_fast8_t m, uint_fast8_t n)
 {
     SARBODY(int_fast8_t, uint_fast8_t);
 }
 
-static int_fast16_t
+static inline int_fast16_t
 sarfast16(int_fast16_t m, uint_fast8_t n)
 {
     SARBODY(int_fast16_t, uint_fast16_t);
 }
 
-static int_fast32_t
+static inline int_fast32_t
 sarfast32(int_fast32_t m, uint_fast8_t n)
 {
     SARBODY(int_fast32_t, uint_fast32_t);
 }
 
-static int_fast64_t
+static inline int_fast64_t
 sarfast64(int_fast64_t m, uint_fast8_t n)
 {
     SARBODY(int_fast64_t, uint_fast64_t);
 }
 
-static int_least8_t
+static inline int_least8_t
 sarleast8(int_least8_t m, uint_fast8_t n)
 {
     SARBODY(int_least8_t, uint_least8_t);
 }
 
-static int_least16_t
+static inline int_least16_t
 sarleast16(int_least16_t m, uint_fast8_t n)
 {
     SARBODY(int_least16_t, uint_least16_t);
 }
 
-static int_least32_t
+static inline int_least32_t
 sarleast32(int_least32_t m, uint_fast8_t n)
 {
     SARBODY(int_least32_t, uint_least32_t);
 }
 
-static int_least64_t
+static inline int_least64_t
 sarleast64(int_least64_t m, uint_fast8_t n)
 {
     SARBODY(int_least64_t, uint_least64_t);
 }
 
-static intmax_t
+static inline intmax_t
 sarmax(intmax_t m, uint_fast8_t n)
 {
     SARBODY(intmax_t, uintmax_t);
 }
+#endif /* ifdef UINT_FAST8_MAX */
 
 /* optionally included in stdint.h */
 #ifdef INT8_MAX
-static int8_t
+static inline int8_t
 sar8(int8_t m, uint_fast8_t n)
 {
     SARBODY(int8_t, uint8_t);
@@ -153,7 +152,7 @@ sar8(int8_t m, uint_fast8_t n)
 #endif
 
 #ifdef INT16_MAX
-static int16_t
+static inline int16_t
 sar16(int16_t m, uint_fast8_t n)
 {
     SARBODY(int16_t, uint16_t);
@@ -161,7 +160,7 @@ sar16(int16_t m, uint_fast8_t n)
 #endif
 
 #ifdef INT32_MAX
-static int32_t
+static inline int32_t
 sar32(int32_t m, uint_fast8_t n)
 {
     SARBODY(int32_t, uint32_t);
@@ -169,7 +168,7 @@ sar32(int32_t m, uint_fast8_t n)
 #endif
 
 #ifdef INT64_MAX
-static int64_t
+static inline int64_t
 sar64(int64_t m, uint_fast8_t n)
 {
     SARBODY(int64_t, uint64_t);
@@ -177,9 +176,11 @@ sar64(int64_t m, uint_fast8_t n)
 #endif
 
 #ifdef INTPTR_MAX
-static intptr_t
+static inline intptr_t
 sarptr(intptr_t m, uint_fast8_t n)
 {
     SARBODY(intptr_t, uintptr_t);
 }
 #endif
+
+#endif /* ifndef SAR_C */
