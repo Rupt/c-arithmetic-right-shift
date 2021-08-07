@@ -1,14 +1,19 @@
 # Portable C arithmetic right shift
 
-### Probably useless: check your implementation. This has no guarantees for exotic integer representations.
+> Right shifting a signed quantity will fill with bit signs ("arithmetic shift")
+> on some machines and with 0-bits ("logical shift") on others.
 
-The C programming language does not specify the value of  `-5 >> 1`.¹
+&mdash; *The C Programming Language* K&R
 
-Normal implementations choose `-5 >> 1 == -3`, which is `-5/2` rounded towards `-INFINITY`.²
+Signed right shifts in C have implementation-defined behaviour¹.
 
-That is a **s**igned **a**rithmetic **r**ight shift ([sar](https://github.com/Rupt/c-arithmetic-right-shift)).
+Common implementations choose to fill with sign bits
+(gcc¹, clang², msvc³).
 
-The alternative 'logical' shift would result in a large positive number.
+That is a **s**igned **a**rithmetic **r**ight shift
+([sar](https://github.com/Rupt/c-arithmetic-right-shift)).
+
+The logical shift would result in a large positive number.
 
 Functions in sar.c do some bit twiddling to provide portable arithmetic right shifts.
 ```C
@@ -16,7 +21,7 @@ sari(-5, 1) == -3; /* true */
 ```
 They compile to small, branchless instructions; see for yourself on the [Compiler Explorer](https://godbolt.org/z/Pc6zcc).
 
-Standard integer types are supported for pedantic C99.
+Standard integer types are supported for pedantic C99 and C++11.
 
 ## Use
 ```C
@@ -105,6 +110,16 @@ make test
 ```
 
 ___
-¹ "The result of `E1 >> E2` is `E1` right-shifted `E2` bit positions. ... If `E1` has a signed type and a negative value, the resulting value is implementation-defined." ISO/IEC 9899:TC2 6.5.7, p84-85
+¹ *"The result of `E1 >> E2` is `E1` right-shifted `E2` bit positions. ...
+If `E1` has a signed type and a negative value, the resulting value is
+implementation-defined."*, ISO C N2176 6.5.7, p84-85
 
-² Making this code mostly useless, but hopefully also mostly harmless.
+² *"Signed ‘>>’ acts on negative numbers by sign extension."*,
+[GCC C Implementation-Defined Behavior 4.5 Integers](https://gcc.gnu.org/onlinedocs/gcc/Integers-implementation.html#Integers-implementation)
+
+³ *"GCC is currently the defacto-standard open source
+compiler today"*,
+[Clang - Features and Goals](https://clang.llvm.org/features.html#gcccompat).
+
+⁴ *"the Microsoft C++ compiler uses the sign bit to fill vacated bit positions"*
+[Left Shift and Right Shift Operators (>> and <<)](https://docs.microsoft.com/en-us/cpp/cpp/left-shift-and-right-shift-operators-input-and-output?view=msvc-160#right-shifts)
