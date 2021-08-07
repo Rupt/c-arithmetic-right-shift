@@ -18,8 +18,8 @@
  * implementation provides it, and which is always branchless and small.
  *
  * Context:
- * stdint.h
- *     integer types and macros implied by their presence
+ * stdint.h (optional)
+ *     for more integer types and macros
  *
  * MIT LICENSE Copyright (c) 2020 Rupert Tombs
  */
@@ -56,31 +56,31 @@
 
 
 static inline signed char
-sarc(signed char m, uint_fast8_t n)
+sarc(signed char m, char n)
 {
     SARBODY(signed char, unsigned char);
 }
 
 static inline short int
-sars(short int m, uint_fast8_t n)
+sars(short int m, char n)
 {
     SARBODY(short int, unsigned short int);
 }
 
 static inline int
-sari(int m, uint_fast8_t n)
+sari(int m, char n)
 {
     SARBODY(int, unsigned int);
 }
 
 static inline long int
-sarl(long int m, uint_fast8_t n)
+sarl(long int m, char n)
 {
     SARBODY(long int, unsigned long int);
 }
 
 static inline long long int
-sarll(long long int m, uint_fast8_t n)
+sarll(long long int m, char n)
 {
     SARBODY(long long int, unsigned long long int);
 }
@@ -88,55 +88,55 @@ sarll(long long int m, uint_fast8_t n)
 /* included in stdint.h */
 #ifdef UINT_FAST8_MAX
 static inline int_fast8_t
-sarfast8(int_fast8_t m, uint_fast8_t n)
+sarfast8(int_fast8_t m, char n)
 {
     SARBODY(int_fast8_t, uint_fast8_t);
 }
 
 static inline int_fast16_t
-sarfast16(int_fast16_t m, uint_fast8_t n)
+sarfast16(int_fast16_t m, char n)
 {
     SARBODY(int_fast16_t, uint_fast16_t);
 }
 
 static inline int_fast32_t
-sarfast32(int_fast32_t m, uint_fast8_t n)
+sarfast32(int_fast32_t m, char n)
 {
     SARBODY(int_fast32_t, uint_fast32_t);
 }
 
 static inline int_fast64_t
-sarfast64(int_fast64_t m, uint_fast8_t n)
+sarfast64(int_fast64_t m, char n)
 {
     SARBODY(int_fast64_t, uint_fast64_t);
 }
 
 static inline int_least8_t
-sarleast8(int_least8_t m, uint_fast8_t n)
+sarleast8(int_least8_t m, char n)
 {
     SARBODY(int_least8_t, uint_least8_t);
 }
 
 static inline int_least16_t
-sarleast16(int_least16_t m, uint_fast8_t n)
+sarleast16(int_least16_t m, char n)
 {
     SARBODY(int_least16_t, uint_least16_t);
 }
 
 static inline int_least32_t
-sarleast32(int_least32_t m, uint_fast8_t n)
+sarleast32(int_least32_t m, char n)
 {
     SARBODY(int_least32_t, uint_least32_t);
 }
 
 static inline int_least64_t
-sarleast64(int_least64_t m, uint_fast8_t n)
+sarleast64(int_least64_t m, char n)
 {
     SARBODY(int_least64_t, uint_least64_t);
 }
 
 static inline intmax_t
-sarmax(intmax_t m, uint_fast8_t n)
+sarmax(intmax_t m, char n)
 {
     SARBODY(intmax_t, uintmax_t);
 }
@@ -145,7 +145,7 @@ sarmax(intmax_t m, uint_fast8_t n)
 /* optionally included in stdint.h */
 #ifdef INT8_MAX
 static inline int8_t
-sar8(int8_t m, uint_fast8_t n)
+sar8(int8_t m, char n)
 {
     SARBODY(int8_t, uint8_t);
 }
@@ -153,7 +153,7 @@ sar8(int8_t m, uint_fast8_t n)
 
 #ifdef INT16_MAX
 static inline int16_t
-sar16(int16_t m, uint_fast8_t n)
+sar16(int16_t m, char n)
 {
     SARBODY(int16_t, uint16_t);
 }
@@ -161,7 +161,7 @@ sar16(int16_t m, uint_fast8_t n)
 
 #ifdef INT32_MAX
 static inline int32_t
-sar32(int32_t m, uint_fast8_t n)
+sar32(int32_t m, char n)
 {
     SARBODY(int32_t, uint32_t);
 }
@@ -169,7 +169,7 @@ sar32(int32_t m, uint_fast8_t n)
 
 #ifdef INT64_MAX
 static inline int64_t
-sar64(int64_t m, uint_fast8_t n)
+sar64(int64_t m, char n)
 {
     SARBODY(int64_t, uint64_t);
 }
@@ -177,7 +177,7 @@ sar64(int64_t m, uint_fast8_t n)
 
 #ifdef INTPTR_MAX
 static inline intptr_t
-sarptr(intptr_t m, uint_fast8_t n)
+sarptr(intptr_t m, char n)
 {
     SARBODY(intptr_t, uintptr_t);
 }
