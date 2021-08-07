@@ -31,10 +31,10 @@ saruc(signed char m, char n)
     SARUBODY(signed char, unsigned char);
 }
 
-static inline short int
-sarus(short int m, char n)
+static inline short
+sarus(short m, char n)
 {
-    SARUBODY(short int, unsigned short int);
+    SARUBODY(short, unsigned short);
 }
 
 static inline int

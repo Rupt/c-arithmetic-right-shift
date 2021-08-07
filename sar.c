@@ -61,10 +61,10 @@ sarc(signed char m, char n)
     SARBODY(signed char, unsigned char);
 }
 
-static inline short int
-sars(short int m, char n)
+static inline short
+sars(short m, char n)
 {
-    SARBODY(short int, unsigned short int);
+    SARBODY(short, unsigned short);
 }
 
 static inline int
