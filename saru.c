@@ -43,16 +43,16 @@ sarui(int m, char n)
     SARUBODY(int, unsigned int);
 }
 
-static inline long int
-sarul(long int m, char n)
+static inline long
+sarul(long m, char n)
 {
-    SARUBODY(long int, unsigned long int);
+    SARUBODY(long, unsigned long);
 }
 
-static inline long long int
-sarull(long long int m, char n)
+static inline long long
+sarull(long long m, char n)
 {
-    SARUBODY(long long int, unsigned long long int);
+    SARUBODY(long long, unsigned long long);
 }
 
 /* included in stdint.h */

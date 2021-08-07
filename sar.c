@@ -73,16 +73,16 @@ sari(int m, char n)
     SARBODY(int, unsigned int);
 }
 
-static inline long int
-sarl(long int m, char n)
+static inline long
+sarl(long m, char n)
 {
-    SARBODY(long int, unsigned long int);
+    SARBODY(long, unsigned long);
 }
 
-static inline long long int
-sarll(long long int m, char n)
+static inline long long
+sarll(long long m, char n)
 {
-    SARBODY(long long int, unsigned long long int);
+    SARBODY(long long, unsigned long long);
 }
 
 /* included in stdint.h */
