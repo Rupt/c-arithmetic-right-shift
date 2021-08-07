@@ -9,6 +9,7 @@
 #include "sar.c"
 #include "saru.c"
 
+
 void
 testeq(signed char m, signed char n, signed char eq)
 {
@@ -49,7 +50,8 @@ testeq(signed char m, signed char n, signed char eq)
     assert(sarptr(m, n) == eq);
 #endif
 
-    /* versions which correction of logical shifts */
+    /* versions which correct logical shifts */
+    /* included in saru.c */
     assert(saruc(m, n) == eq);
     assert(sarus(m, n) == eq);
     assert(sarui(m, n) == eq);
@@ -92,18 +94,28 @@ main()
 {
     /* some examples small enough to fit 8-bit signed char */
     signed char checks[][3] = {
+        {0, 1, 0},
+        {0, 7, 0},
         /* negative */
+        {-1, 0, -1},
         {-1, 1, -1},
+        {-1, 7, -1},
+        {-5, 0, -5},
         {-5, 2, -2},
         {-5, 1, -3},
         {-128, 1, -64},
         /* positive */
+        {1, 0, 1},
         {1, 1, 0},
         {4, 1, 2},
+        {5, 0, 5},
         {5, 1, 2},
+        {127, 0, 127},
         {127, 1, 63},
+        {127, 6, 1},
+        {127, 7, 0},
     };
-    int nchecks = sizeof(checks)/sizeof(checks[0]);
+    int nchecks = sizeof(checks) / sizeof(*checks);
 
     for (int i = 0; i < nchecks; ++i)
         testeq(checks[i][0], checks[i][1], checks[i][2]);
